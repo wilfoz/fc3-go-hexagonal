@@ -42,20 +42,20 @@ type ProductPersistenceInterface interface {
 
 const (
 	DISABLED = "disabled"
-	ENABLED = "enabled"
+	ENABLED  = "enabled"
 )
 
 type Product struct {
-	ID string `valid:"uuidv4"`
-	Name string `valid:"required"`
-	Price float64 `valid:"float,optional"`
-	Status string `valid:"required"`
+	ID     string  `valid:"uuidv4"`
+	Name   string  `valid:"required"`
+	Price  float64 `valid:"float,optional"`
+	Status string  `valid:"required"`
 }
 
 func NewProduct() *Product {
 	product := Product{
-		ID: uuid.NewV4().String()
-		Status: DISABLED
+		ID:     uuid.NewV4().String(),
+		Status: DISABLED,
 	}
 	return &product
 }
@@ -85,7 +85,7 @@ func (p *Product) Enable() error {
 		p.Status = ENABLED
 		return nil
 	}
-	return errors.New("the price must be greater than zero to enable product")
+	return errors.New("the price must be greater than zero to enable the product")
 }
 
 func (p *Product) Disable() error {
@@ -93,7 +93,7 @@ func (p *Product) Disable() error {
 		p.Status = DISABLED
 		return nil
 	}
-	return errors.New("the price must be zero to have the product disabled")
+	return errors.New("the price must be zero in order to have the product disabled")
 }
 
 func (p *Product) GetID() string {
